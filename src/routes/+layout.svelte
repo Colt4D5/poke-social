@@ -2,6 +2,9 @@
   import '@picocss/pico';
   import "../app.postcss";
   import SideNav from '$components/SideNav.svelte';
+  import Bench from '$components/Bench.svelte';
+  export let data;
+  const benchedCards = data.benchedCards;
 </script>
 
 <div id="feed-grid" class="grid">
@@ -11,9 +14,7 @@
     <slot></slot>
   </main>
 
-  <aside>
-
-  </aside>
+  <Bench {benchedCards} />
 
 </div>
 

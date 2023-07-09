@@ -29,6 +29,7 @@
     width: 100%;
     min-height: 250px;
     background-size: cover;
+    background-position: center;
     position: relative;
     margin-bottom: calc(var(--avatar-size) / 2);
     & #user-avatar {
