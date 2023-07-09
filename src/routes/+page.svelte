@@ -2,12 +2,15 @@
   import Post from "../lib/components/Post.svelte";
   export let data;
   import { posts } from './posts';
+
+  const banner = data?.user?.banner || 'src/lib/assets/images/pokemon-tcg-banner.jpg';
+  const avatar = data?.user?.avatar || 'src/lib/assets/images/pokeball-avatar.png';
 </script>
 
 <div class="padding"></div>
 
-<div id="user-banner" style="background-image: url({data.user.banner})">
-  <img id="user-avatar" src={data.user.avatar} alt="Avatar" />
+<div id="user-banner" style="background-image: url({banner})">
+  <img id="user-avatar" src={avatar} alt="Avatar" />
 </div>
 
 
