@@ -1,6 +1,4 @@
 <script>
-  // import '@picocss/pico';
-  // import "../app.postcss";
   import SideNav from '$components/SideNav.svelte';
   import Bench from '$components/Bench.svelte';
   export let data;

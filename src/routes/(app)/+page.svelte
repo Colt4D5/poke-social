@@ -1,7 +1,7 @@
 <script>
   import Post from "$components/Post.svelte";
   export let data;
-  import { posts } from './posts';
+  import { posts } from './posts'; // temporary
 
   const banner = data?.user?.banner || 'src/lib/assets/images/pokemon-tcg-banner.jpg';
   const avatar = data?.user?.avatar || 'src/lib/assets/images/pokeball-avatar.png';
@@ -16,8 +16,9 @@
 
 <div id="feed">
   <div id="user-info">
-    <h2 id="user-name">{data.user.name}</h2>
-    <h3 id="user-username">@{data.user.username}</h3>
+    <h2 id="user-name">{data.user.username}</h2>
+    <span>${data.user.balance.toFixed(2)}</span>
+    <!-- <h3 id="user-username">@{data.user.username}</h3> -->
   </div>
 
   {#each posts as post }
@@ -50,6 +51,9 @@
   #feed {
     & #user-info {
       padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
       & #user-name {
         margin-bottom: 0;
       }

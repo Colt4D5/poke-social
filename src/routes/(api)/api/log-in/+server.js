@@ -1,3 +1,4 @@
+import db from '$db';
 import bcrypt from 'bcrypt';
 
 export async function POST({ request }) {
@@ -13,17 +14,35 @@ export async function POST({ request }) {
     }));
   }
 
-  console.log(email, password);
+  const user = await db.collection('trainers').findOne({ email });
 
-  // password = asdfasdf
-  const testPw = '$2b$10$NnTV8iFESE5GgS1KQqMG9OURO6aoXgSmLU5rCgc4eGZ08WGlYp2tC';
+  if (!user) {
+    return new Response(
+      JSON.stringify({
+      status: 400,
+      body: {
+        error: "Invalid email or password",
+      },
+    }));
+  }
 
-  const match = await bcrypt.compare(password, testPw);
+  const match = await bcrypt.compare(password, user.password);
 
-  console.log(match);
+  if (!match) {
+    return new Response(
+      JSON.stringify({
+      status: 400,
+      body: {
+        error: "Invalid email or password",
+      },
+    }));
+  }
 
   return new Response(JSON.stringify({ 
     status: 200, 
-    body: { message: "Success" } 
+    body: { 
+      message: "Success",
+      method: 'login'
+    } 
   }));
 }

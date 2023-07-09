@@ -8,8 +8,10 @@ const config = {
     alias: {
       $assets: "src/lib/assets",
       $components: "src/lib/components",
+      $db: "src/lib/db",
       $lib: "src/lib",
       $poke: "src/lib/poke",
+      $utils: "src/lib/utils",
     }
   },
 

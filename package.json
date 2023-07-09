@@ -20,6 +20,9 @@
   "dependencies": {
     "@picocss/pico": "^1.5.10",
     "bcrypt": "^5.1.0",
-    "pokemontcgsdk": "^2.0.0"
+    "mongodb": "^5.7.0",
+    "pokemontcgsdk": "^2.0.0",
+    "svelte-french-toast": "^1.1.0",
+    "uuid": "^9.0.0"
   }
 }

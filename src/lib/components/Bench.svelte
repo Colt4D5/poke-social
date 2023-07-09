@@ -47,6 +47,7 @@
         object-fit: contain;
         object-position: center;
         cursor: zoom-in;
+        border-radius: 0.5rem;
       }
     }
   }
@@ -57,6 +58,7 @@
       position: relative;
       & img {
         height: 80vh;
+        border-radius: 1rem;
       }
       & .close {
         position: absolute;
