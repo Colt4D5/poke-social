@@ -1,4 +1,6 @@
 <script>
+  import { fade, scale } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
   export let benchedCards = [];
   const modal = {
     isOpen: false,
@@ -19,10 +21,10 @@
 </aside>
 
 {#if modal.isOpen }
-  <dialog open>
-    <div class="zoomed-card-container">
+  <dialog open transition:fade>
+    <div class="zoomed-card-container" transition:scale={{ duration: 500, delay: 500, opacity: 0.5, start: 0.5, easing: quintOut }}>
       <img src={modal.card.images.large} alt={modal.card.name}>
-      <form method="dialog">
+      <form method="dialog" on:submit={() => modal.isOpen = false}>
         <button class="close" on:click={() => modal.isOpen = false}>&#10006;</button>
       </form>
     </div>

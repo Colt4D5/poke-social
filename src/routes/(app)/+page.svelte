@@ -7,7 +7,7 @@
   const avatar = data?.user?.avatar || 'src/lib/assets/images/pokeball-avatar.png';
 </script>
 
-<div class="padding"></div>
+<div class="padding-block"></div>
 
 <div id="user-banner" style="background-image: url({banner})">
   <img id="user-avatar" src={avatar} alt="Avatar" />

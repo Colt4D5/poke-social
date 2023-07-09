@@ -1,29 +1,15 @@
 <script>
-  export let post = {
-    pinned: false,
-    id: '2498gahlsihfq8qfsh8idah',
-    name: 'Joe Schmuck',
-    username: 'jschmuck07',
-    date: 'May 20',
-    avatar: 'https://plus.unsplash.com/premium_photo-1663054503467-950366c7e782?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Aperiam laboriosam aspernatur, quo debitis odio eius natus quaerat ab laudantium explicabo soluta! Eligendi laudantium nulla labore?',
-    image: 'https://images.unsplash.com/photo-1688746515540-61243f2012b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
-    liked: false,
-    stats: {
-      comments: 4,
-      shares: 15,
-      likes: 37,
-    }
-  }
+  export let post;
   import commentIcon from '$assets/svg/comment.svg?raw';
   import reshareIcon from '$assets/svg/reshare.svg?raw';
   import heartIcon from '$assets/svg/heart.svg?raw';
   import shareIcon from '$assets/svg/share.svg?raw';
+  import pinnedIcon from '$assets/svg/pin.svg?raw';
 </script>
 
 <article data-id={post.id}>
   {#if post.pinned }
-    <div class="pinned">{'<'} Pinned Tweet</div>
+    <div class="pinned">{@html pinnedIcon} Pinned Tweet</div>
   {/if}
   <div id="post-data">
     <section class="post-avatar">
@@ -62,6 +48,10 @@
     & .pinned {
       padding-left: 4rem;
       font-size: 0.9rem;
+      & svg {
+        width: 20px;
+        height: 20px;
+      }
     }
     & #post-data {
       display: flex;

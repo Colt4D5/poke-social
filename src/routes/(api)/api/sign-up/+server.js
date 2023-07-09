@@ -30,6 +30,8 @@ export async function POST({ request }) {
     is_active: true,
     is_verified: true,
     posts: [],
+    allies: [],
+    rival: '',
     purchases: [],
     owned_cards: [],
     benched_cards: [],
