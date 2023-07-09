@@ -1,5 +1,5 @@
 <script>
-  import Post from "../lib/components/Post.svelte";
+  import Post from "$components/Post.svelte";
   export let data;
   import { posts } from './posts';
 
