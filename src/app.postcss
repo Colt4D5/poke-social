@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: 
+      url('./lib/assets/fonts/montserrat-variablefont_wght-webfont.woff2') format('woff2'),
+      url('./lib/assets/fonts/montserrat-variablefont_wght-webfont.woff') format('woff'),
+      url('./lib/assets/fonts/montserrat-italic-variablefont_wght-webfont.woff2') format('woff2'),
+      url('./lib/assets/fonts/montserrat-italic-variablefont_wght-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  cursor: unset;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  & * {
+    --font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* ::-webkit-selection {
+  background-color: var(--secondary);
+  color: #fff;
+}
+::-moz-selection {
+  background-color: var(--secondary);
+  color: #fff;
+}
+::selection {
+  background-color: var(--secondary);
+  color: #fff;
+} */
+
+a {
+  cursor: pointer;
+}
+
+a.button, button {
+  border-radius: 4rem;
+}
+
+.padding {
+  width: 100%;
+  padding-block: 1.25rem;
+}
