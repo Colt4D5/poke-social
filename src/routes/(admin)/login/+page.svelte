@@ -47,6 +47,8 @@
         invalidateAll();
         window.location.reload();
       }
+    } else if (json.status === 409) {
+      toast.error(json.body.error);
     } else if ([400, 404].includes(json.status)) {
       toast.error('Your login credentials are incorrect');
     } else {

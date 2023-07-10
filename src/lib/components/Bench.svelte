@@ -13,6 +13,7 @@
 </script>
 
 <aside>
+  <h2>My Bench</h2>
   <div id="bench">
     {#each benchedCards as card }
       <img on:click={() => zoomCard(card)} class="bench-card" src={card.images.small} alt="Benched Pokemon Card">
@@ -34,7 +35,10 @@
 <style lang="postcss">
   aside {
     position: sticky;
-    padding-top: 3rem;
+    padding-top: 1rem;
+    & h2 {
+      margin-bottom: 1rem;
+    }
     & #bench {
       background-color: #ffffff11;
       border-radius: 1rem;

@@ -1,7 +1,11 @@
-import { BlockList } from 'net';
+import pokemon from '$poke';
 
 export async function load({ params }) {
   const { id } = params;
 
-  return {id}
+  const set = await pokemon.set.find(id)
+
+  return {
+    set
+  }
 }

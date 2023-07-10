@@ -6,11 +6,30 @@ export async function POST({ request }) {
   const { email, username, password } = await request.json();
 
   if (!email || !password) {
-    return new Response(
-      JSON.stringify({
+    return new Response(JSON.stringify({
       status: 400,
       body: {
         error: "Email, username, and password are required",
+      },
+    }));
+  }
+
+  const emailMatch = await db.collection('trainers').find({ email }).toArray();
+  if (emailMatch.length > 0) {
+    return new Response(JSON.stringify({
+      status: 409,
+      body: {
+        error: "This email is already linked to an account",
+      },
+    }));
+  }
+
+  const usernameMatch = await db.collection('trainers').find({ username }).toArray();
+  if (usernameMatch.length > 0) {
+    return new Response(JSON.stringify({
+      status: 409,
+      body: {
+        error: "This username is already in use",
       },
     }));
   }
