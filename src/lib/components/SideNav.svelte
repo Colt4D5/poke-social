@@ -15,6 +15,7 @@
   import logoutIcon from '$assets/svg/logout.svg?raw';
   import pokeballIcon from '$assets/svg/pokeball.svg?raw';
   import toast from 'svelte-french-toast';
+  import toast_ from 'svelte-french-toast';
 
   const dispatch = createEventDispatcher();
 
@@ -54,12 +55,12 @@
   <nav>
     <ul>
       <li><a title="Home" data-function="home" href="/">{@html homeIcon}Home</a></li>
-      <li><a title="Explore" data-function="explore" href="/sets">{@html exploreIcon}Explore</a></li>
+      <li><a title="Explore" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html exploreIcon}Explore</a></li>
       <li><a title="Notifications" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html notificationsIcon}Notifications</a></li>
       <li><a title="Messages" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html messagesIcon}Messages</a></li>
       <li><a title="Bookmarks" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html bookmarkIcon}Bookmarks</a></li>
-      <li><a title="Lists" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html listIcon}Lists</a></li>
-      <li><a title="Profile" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html profileIcon}Profile</a></li>
+      <li><a title="Booster Sets" data-function="Booster Sets" href="/sets">{@html listIcon}Boosters</a></li>
+      <li><a title="Profile" data-function="profile" href="/trainer-profile">{@html profileIcon}Profile</a></li>
       <li><a title="More" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html moreIcon}More</a></li>
       <li><a title="Log Out" data-function="logout" on:click|preventDefault={logOut} href="/login"><span style="transform: rotate(180deg);">{@html logoutIcon}</span>Log Out</a></li>
     </ul>

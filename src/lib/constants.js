@@ -1,0 +1,1 @@
+export const setPrice = 3.99;
