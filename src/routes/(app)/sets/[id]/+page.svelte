@@ -1,10 +1,14 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-french-toast';
+  import PokeballLoader from "$components/PokeballLoader.svelte";
   export let data;
   const { set } = data;
 
+  $: pokeModal = false
+
   const purchaseBooster = async () => {
+    openPokeball();
     const res = await fetch('/api/purchase-set', {
       method: 'POST',
       headers: {
@@ -15,9 +19,20 @@
         user: data.user
       })
     })
+    closePokeball();
     const json = await res.json();
     toast.success('Success!')
-    goto(`/trainer-profile/purchases/${json.body.purchase_id}`)
+    setTimeout(() => {
+      goto(`/trainer-profile/purchases/${json.body.purchase_id}`)
+    }, 1250);
+  }
+
+  const openPokeball = () => {
+    pokeModal = true;
+  }
+
+  const closePokeball = () => {
+    pokeModal = false;
   }
 </script>
 
@@ -50,6 +65,10 @@
     </div>
   {/if} -->
 </div>
+
+{#if pokeModal }
+  <PokeballLoader />
+{/if}
 
 <style lang="postcss">
   #set-details {

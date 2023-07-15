@@ -1,14 +1,24 @@
 <script>
   import SideNav from '$components/SideNav.svelte';
   import Bench from '$components/Bench.svelte';
+  import PokeballLoader from '$components/PokeballLoader.svelte';
   export let data;
   const benchedCards = data.benchedCards;
 
   let navIsOpen = true;
+
+  $: pokeModal = false
+
+  const loadPokeball = () => {
+    pokeModal = true;
+    setTimeout(() => {
+      pokeModal = false;
+    }, 6000);
+  }
 </script>
 
 <div id="feed-grid" class="grid" class:nav-is-open={navIsOpen} >
-  <SideNav {navIsOpen} on:toggleSideNav={() => navIsOpen = !navIsOpen} />
+  <SideNav {navIsOpen} on:loadPokeball={loadPokeball} on:toggleSideNav={() => navIsOpen = !navIsOpen} />
 
   <main>
     <slot></slot>
@@ -18,7 +28,12 @@
     <Bench {benchedCards} />
   {/if}
 
+  
 </div>
+
+{#if pokeModal }
+  <PokeballLoader />
+{/if}
 
 <style lang="postcss">
   #feed-grid {

@@ -15,7 +15,6 @@
   import logoutIcon from '$assets/svg/logout.svg?raw';
   import pokeballIcon from '$assets/svg/pokeball.svg?raw';
   import toast from 'svelte-french-toast';
-  import toast_ from 'svelte-french-toast';
 
   const dispatch = createEventDispatcher();
 
@@ -42,6 +41,10 @@
       toast.error("Sorry, this button doesn't do anything yet...")
     }
   }
+
+  const dispatchPokeball = () => {
+    dispatch('loadPokeball');
+  }
 </script>
 
 <aside class:open={navIsOpen}>
@@ -64,7 +67,7 @@
       <li><a title="More" data-function="n/a" on:click|preventDefault={handleClick} href="/">{@html moreIcon}More</a></li>
       <li><a title="Log Out" data-function="logout" on:click|preventDefault={logOut} href="/login"><span style="transform: rotate(180deg);">{@html logoutIcon}</span>Log Out</a></li>
     </ul>
-    <button title="Catch" class="catch-button">
+    <button title="Catch" class="catch-button" on:click={dispatchPokeball}>
       {#if navIsOpen }
         Catch&nbsp;
       {/if}
