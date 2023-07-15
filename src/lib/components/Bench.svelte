@@ -1,14 +1,21 @@
 <script>
   import { fade, scale } from 'svelte/transition';
-  import { quintOut } from 'svelte/easing';
+  import { quintOut, quintIn, quintInOut } from 'svelte/easing';
   export let benchedCards = [];
+
   const modal = {
     isOpen: false,
     card: null
   }
-  const zoomCard = (card) => {
+
+  const openCard = (card) => {
     modal.card = card;
     modal.isOpen = true;
+  }
+
+  const closeCard = () => {
+    modal.isOpen = false;
+    modal.card = {};
   }
 </script>
 
@@ -16,18 +23,18 @@
   <h2>My Bench</h2>
   <div id="bench">
     {#each benchedCards as card }
-      <img on:click={() => zoomCard(card)} class="bench-card" src={card.images.small} alt="Benched Pokemon Card">
+      <img on:click={() => openCard(card)} class="bench-card" src={card.images.small} alt="Benched Pokemon Card">
     {/each}
   </div>
 </aside>
 
 {#if modal.isOpen }
-  <dialog open transition:fade>
-    <div class="zoomed-card-container" transition:scale={{ duration: 500, delay: 500, opacity: 0.5, start: 0.5, easing: quintOut }}>
+  <dialog open in:fade out:fade={{ delay: 200, duration: 250 }}>
+    <div class="zoomed-card-container" in:scale={{ duration: 250, delay: 250, opacity: 0.5, start: 0.25, easing: quintOut }} out:scale={{ duration: 400, opacity: 0.5, start: 0.25, easing: quintOut }}>
       <img src={modal.card.images.large} alt={modal.card.name}>
-      <form method="dialog" on:submit={() => modal.isOpen = false}>
-        <button class="close" on:click={() => modal.isOpen = false}>&#10006;</button>
-      </form>
+      <!-- <form method="dialog"> -->
+        <button class="close" on:click={closeCard}>&#10006;</button>
+      <!-- </form> -->
     </div>
   </dialog>
 {/if}

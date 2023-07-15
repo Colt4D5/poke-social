@@ -10,7 +10,7 @@ export async function load({ parent }) {
 
   for (const card of updatedUser.owned_cards) {
     const cardData = await pokemon.card.find(card.card);
-    myCards.push({...cardData, date_purchased: card.date_purchased});
+    myCards.push({...cardData, date_purchased: card.date_purchased, quantity: card.quantity});
   }
 
   return {

@@ -1,6 +1,8 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-french-toast';
   export let data;
-  const { set, holos } = data;
+  const { set } = data;
 
   const purchaseBooster = async () => {
     const res = await fetch('/api/purchase-set', {
@@ -14,7 +16,8 @@
       })
     })
     const json = await res.json();
-    console.log(json.cards);
+    toast.success('Success!')
+    goto(`/trainer-profile/purchases/${json.body.purchase_id}`)
   }
 </script>
 
@@ -34,7 +37,7 @@
     </div>
   </div>
   <hr>
-  {#if holos?.data?.length > 0 }
+  <!-- {#if holos?.data?.length > 0 }
     <div id="fine-details">
       <h3>Notable Cards</h3>
       <div id="notable-cards">
@@ -45,7 +48,7 @@
         {/each}
       </div>
     </div>
-  {/if}
+  {/if} -->
 </div>
 
 <style lang="postcss">

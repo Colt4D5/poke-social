@@ -5,14 +5,15 @@ export async function load({ params }) {
 
   const set = await pokemon.set.find(id)
 
-  const holos = await pokemon.card.where({ 
-    q: `set.name:${set.name} rarity:holo`,
-    pageSize: 4, 
-    page: 1,
-  })
+  // const holos = await pokemon.card.where({ 
+  //   q: `set.name:${set.name} rarity:holo`,
+  //   pageSize: 4, 
+  //   page: 1,
+  // })
+  // console.log(set, holos);
 
   return {
     set,
-    holos
+    // holos
   }
 }

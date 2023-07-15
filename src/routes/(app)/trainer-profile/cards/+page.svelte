@@ -10,6 +10,20 @@
     const mins = date.getMinutes();
     return `${months[month]} ${day}, ${year} at ${hrs}:${mins}`
   }
+
+  const openImage = (card) => {
+    console.log(card);
+  }
+
+  const handleClick = async (e) => {
+    const target = e.target.closest('.card');
+    const cardData = JSON.parse(target.dataset.card);
+    if (e.target.closest('img.icon')) {
+      openImage(cardData);
+      return;
+    }
+    console.log(cardData);
+  }
 </script>
 
 <div class="padding-block"></div>
@@ -18,39 +32,85 @@
   <h1>My Cards</h1>
 
   {#if data?.cards?.length > 0 }
-    <div id="my-card-grid">
+    <table id="card-table">
+      <tr>
+
+        <th></th>
+
+        <th>Card</th>
+
+        <th>Received</th>
+
+        <th>Quantity</th>
+
+      </tr>
       {#each data.cards as card }
-        <div class="card">
-          <img src={card.images.small} alt={card.name} />
-          <h2 class="card-title">{card.name}</h2>
-          <p class="card-purchase-date">{formatDate(card.date_purchased)}</p>
-        </div>
+        <tr on:click={handleClick} class="card" data-card={JSON.stringify(card)}>
+          <td>
+            {#if card?.images?.small }
+              <img class="icon" loading="lazy" src={card.images.small} alt={card.name} />
+            {/if}
+            <!-- <div class="icon"></div> -->
+          </td>
+
+          <td class="card-title">
+            {card.name}
+          </td>
+
+          <td class="card-purchase-date">
+            {formatDate(card.date_purchased)}
+          </td>
+
+          <td>
+            {card.quantity}
+          </td>
+
+        </tr>
       {/each}
-    </div>
+    </table>
   {/if}
 </div>
 
 <style lang="postcss">
   #my-cards {
     padding: 1rem;
-    & #my-card-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 1rem;
-      & .card {
-        width: 100%;
+    & table {
+      & tr {
         text-align: center;
-        & img {
-          width: 100%;
-          max-width: 100%;
+        & th {
+          text-align: center;
         }
-        & .card-title {
-          font-size: 1.1rem;
-          font-weight: 400;
-          margin-bottom: 0.5rem;
-        }
-        & .card-purchase-date {
-          font-size: 0.9rem;
+        &.card {
+          cursor: pointer;
+          &:hover {
+            background-color: #ffffff29;
+          }
+          & td {
+            text-align: center;
+            & .icon {
+              width: 3rem;
+              aspect-ratio: 1 / 1;
+              object-fit: contain;
+              /* background-color: #ffffff33; */
+              transition: scale 0.3s ease;
+              &:hover {
+                scale: 1.15;
+              }
+            }
+            &.card-title {
+              font-size: 1.1rem;
+              font-weight: 400;
+            }
+            &.card-purchase-date {
+              font-size: 0.9rem;
+            }
+          }
+          &:nth-child(2n) {
+            background-color: #ffffff0a;
+            &:hover {
+              background-color: #ffffff29;
+            }
+          }
         }
       }
     }
