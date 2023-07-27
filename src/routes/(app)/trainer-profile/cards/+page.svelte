@@ -31,7 +31,6 @@
 <div id="my-cards">
   <h1>My Cards</h1>
 
-  {#if data?.cards?.length > 0 }
     <table id="card-table">
       <tr>
 
@@ -44,31 +43,48 @@
         <th>Quantity</th>
 
       </tr>
-      {#each data.cards as card }
-        <tr on:click={handleClick} class="card" data-card={JSON.stringify(card)}>
-          <td>
-            {#if card?.images?.small }
-              <img class="icon" loading="lazy" src={card.images.small} alt={card.name} />
-            {/if}
-            <!-- <div class="icon"></div> -->
-          </td>
-
+      {#await data.streamed.cards}
+        <tr>
+          <td></td>
           <td class="card-title">
-            {card.name}
+            card.name
           </td>
-
           <td class="card-purchase-date">
-            {formatDate(card.date_purchased)}
+            card.date_purchased
           </td>
-
           <td>
-            {card.quantity}
+            card.quantity
           </td>
-
         </tr>
-      {/each}
+      {:then cards}
+        {#each cards as card }
+          <tr on:click={handleClick} class="card" data-card={JSON.stringify(card)}>
+            <td>
+              {#if card?.images?.small }
+                <img class="icon" loading="lazy" src={card.images.small} alt={card.name} />
+              {/if}
+              <!-- <div class="icon"></div> -->
+            </td>
+
+            <td class="card-title">
+              {card.name}
+            </td>
+
+            <td class="card-purchase-date">
+              {formatDate(card.date_purchased)}
+            </td>
+
+            <td>
+              {card.quantity}
+            </td>
+
+          </tr>
+        {/each}
+      {:catch err}
+        <p>Whoops! {err.message}</p>
+      {/await}
+      
     </table>
-  {/if}
 </div>
 
 <style lang="postcss">

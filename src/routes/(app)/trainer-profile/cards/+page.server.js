@@ -8,13 +8,24 @@ export async function load({ parent }) {
 
   const myCards = [];
 
-  for (const card of updatedUser.owned_cards) {
-    const cardData = await pokemon.card.find(card.card);
-    myCards.push({...cardData, date_purchased: card.date_purchased, quantity: card.quantity});
-  }
+
+
+  // for (const card of updatedUser.owned_cards) {
+  //   const cardData = await pokemon.card.find(card.card);
+  //   myCards.push({...cardData, date_purchased: card.date_purchased, quantity: card.quantity});
+  // }
 
   return {
     user,
-    cards: myCards
+    streamed: {
+      cards: new Promise(async (fulfill) => {
+        for (let i = 0; i < 10; i++) {
+          const card = updatedUser.owned_cards[i];
+          const cardData = await pokemon.card.find(card.card);
+          myCards.push({...cardData, date_purchased: card.date_purchased, quantity: card.quantity});
+        }
+        fulfill(myCards);
+      })
+    }
   }
 }

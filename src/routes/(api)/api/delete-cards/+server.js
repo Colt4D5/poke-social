@@ -7,8 +7,10 @@ export async function GET({ locals }) {
   await db.collection('trainers').updateOne(
     { email: userEmail }, 
     { 
-      $set: { "owned_cards": [] }, 
-      $set: { "purchases": [] }
+      $set: { 
+        "owned_cards": [],
+        "purchases": []
+      }, 
     }
   );
 

@@ -38,6 +38,9 @@
         setCookie('user_email', email, 30);
         toast.success('Welcome back!');
         invalidateAll();
+        email = ''
+        username = ''
+        password = '';
         goto('/');
       } else { // is signing up
         email = ''
